@@ -5,7 +5,7 @@ RUN rm /etc/nginx/conf.d/default.conf \
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY index.html projects.html blogs.html style.css script.js ivan-pfp.jpg /usr/share/nginx/html/
+COPY index.html projects.html blogs.html style.css script.js ivan-pfp.jpg favicon.svg /usr/share/nginx/html/
 
 RUN chown -R nginx:nginx /usr/share/nginx/html \
     && chmod -R 755 /usr/share/nginx/html
