@@ -59,6 +59,48 @@ body {
 .file-icon { font-size: 16px; }
 .file-name { font-weight: 600; }
 
+/* Repo-style tab navigation */
+.repo-nav {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 16px;
+    background: var(--bg-primary);
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.repo-nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+}
+
+.repo-nav-item:hover {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.repo-nav-item.active {
+    color: var(--text);
+    font-weight: 600;
+    border-bottom-color: #f78166;
+}
+
+.repo-nav-item svg {
+    flex-shrink: 0;
+}
+
 /* Profile header with photo */
 .profile-header {
     display: flex;
@@ -326,6 +368,121 @@ body {
     color: var(--text);
 }
 
+/* Breadcrumb navigation */
+.breadcrumb {
+    font-size: 14px;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+}
+.breadcrumb a {
+    color: var(--link);
+    text-decoration: none;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Page link cards (on index) */
+.page-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px 0 16px;
+}
+.page-link-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+}
+.page-link-card:hover {
+    border-color: var(--link);
+    text-decoration: none;
+}
+.page-link-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+.page-link-card strong {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 2px;
+}
+.page-link-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+}
+.page-link-arrow {
+    margin-left: auto;
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: color 0.15s;
+}
+.page-link-card:hover .page-link-arrow {
+    color: var(--link);
+}
+
+/* Project cards */
+.project-card {
+    padding: 16px 20px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 12px 0 16px;
+    transition: border-color 0.15s;
+}
+.project-card:hover {
+    border-color: var(--link);
+}
+.project-card h3 {
+    margin-top: 0;
+}
+.project-card p {
+    margin-bottom: 8px;
+}
+
+/* Tags */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.tag {
+    font-size: 12px;
+    padding: 2px 8px;
+    background: var(--bg-canvas);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-muted);
+}
+
+/* Blog entries */
+.blog-entry {
+    padding: 16px 20px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 12px 0 16px;
+    transition: border-color 0.15s;
+}
+.blog-entry:hover {
+    border-color: var(--link);
+}
+.blog-entry h3 {
+    margin-top: 0;
+}
+.blog-date {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .markdown-body {
@@ -334,6 +491,10 @@ body {
     }
     .file-header {
         margin: 12px 8px 0;
+    }
+    .repo-nav {
+        margin-left: 8px;
+        margin-right: 8px;
     }
 }
 
