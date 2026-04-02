@@ -21,28 +21,24 @@ function updateGrafanaTheme() {
     }
 }
 
-/* Load saved theme */
 (function () {
-    const saved = localStorage.getItem('theme');
+    var saved = localStorage.getItem('theme');
     if (saved === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
         updateGrafanaTheme();
     }
 })();
 
-/* GitHub-style contribution graph (simulated) */
+/* GitHub contribution graph (simulated) */
 (function () {
-    const graph = document.getElementById('github-graph');
+    var graph = document.getElementById('github-graph');
     if (!graph) return;
-
-    var weeks = 52;
-    var days = 7;
-    for (var w = 0; w < weeks; w++) {
+    for (var w = 0; w < 52; w++) {
         var col = document.createElement('div');
         col.style.display = 'flex';
         col.style.flexDirection = 'column';
         col.style.gap = '3px';
-        for (var d = 0; d < days; d++) {
+        for (var d = 0; d < 7; d++) {
             var cell = document.createElement('div');
             cell.className = 'gh-cell';
             var r = Math.random();
@@ -62,7 +58,6 @@ function updateGrafanaTheme() {
 (function () {
     var grid = document.getElementById('healthcheck-grid');
     if (!grid) return;
-
     var services = [
         { name: 'roussev.com', url: 'https://roussev.com' },
         { name: 'grafana', url: 'https://grafana.roussev.com' },
@@ -71,76 +66,38 @@ function updateGrafanaTheme() {
         { name: 'harbor', url: 'https://harbor.roussev.com' },
         { name: 'traefik', url: 'https://traefik.roussev.com' }
     ];
-
-    // Track tile elements
     var tiles = {};
-
     function createTile(svc, index) {
         var tile = document.createElement('div');
         tile.className = 'hc-tile';
         tile.style.animationDelay = (index * 150) + 'ms';
-        tile.innerHTML =
-            '<span class="hc-dot pending"></span>' +
-            '<span class="hc-name">' + svc.name + '</span>' +
-            '<span class="hc-ms">—</span>' +
-            '<span class="hc-badge">checking</span>';
+        tile.innerHTML = '<span class="hc-dot pending"></span><span class="hc-name">' + svc.name + '</span><span class="hc-ms">—</span><span class="hc-badge">checking</span>';
         return tile;
     }
-
     function checkService(svc, index) {
-        // Create tile if it doesn't exist yet
-        if (!tiles[svc.name]) {
-            var tile = createTile(svc, index);
-            grid.appendChild(tile);
-            tiles[svc.name] = tile;
-        }
-
-        var tile = tiles[svc.name];
-        var dot = tile.querySelector('.hc-dot');
-        var ms = tile.querySelector('.hc-ms');
-        var badge = tile.querySelector('.hc-badge');
-
-        // Set to pending state
-        dot.className = 'hc-dot pending';
-        badge.className = 'hc-badge';
-        badge.textContent = '...';
-
+        if (!tiles[svc.name]) { tiles[svc.name] = createTile(svc, index); grid.appendChild(tiles[svc.name]); }
+        var tile = tiles[svc.name], dot = tile.querySelector('.hc-dot'), ms = tile.querySelector('.hc-ms'), badge = tile.querySelector('.hc-badge');
+        dot.className = 'hc-dot pending'; badge.className = 'hc-badge'; badge.textContent = '...';
         var start = performance.now();
-
         fetch(svc.url, { mode: 'no-cors', cache: 'no-store' })
-            .then(function () {
-                var duration = Math.round(performance.now() - start);
-                dot.className = 'hc-dot up';
-                ms.textContent = duration + 'ms';
-                badge.className = 'hc-badge up';
-                badge.textContent = 'UP';
-            })
-            .catch(function () {
-                dot.className = 'hc-dot down';
-                ms.textContent = '—';
-                badge.className = 'hc-badge down';
-                badge.textContent = 'DOWN';
-            });
+            .then(function () { var d = Math.round(performance.now() - start); dot.className = 'hc-dot up'; ms.textContent = d + 'ms'; badge.className = 'hc-badge up'; badge.textContent = 'UP'; })
+            .catch(function () { dot.className = 'hc-dot down'; ms.textContent = '—'; badge.className = 'hc-badge down'; badge.textContent = 'DOWN'; });
     }
+    services.forEach(function (svc, i) { setTimeout(function () { checkService(svc, i); }, i * 300); });
+    setInterval(function () { services.forEach(function (svc, i) { setTimeout(function () { checkService(svc, i); }, i * 200); }); }, 5000);
+})();
 
-    // Initial check: stagger each service so tiles pop in one by one
-    function initialCheck() {
-        services.forEach(function (svc, i) {
-            setTimeout(function () {
-                checkService(svc, i);
-            }, i * 300);
-        });
+/* Sofia weather + time */
+(function () {
+    var iconEl = document.getElementById('weather-icon'), timeEl = document.getElementById('weather-time'), descEl = document.getElementById('weather-desc'), tempEl = document.getElementById('weather-temp');
+    if (!iconEl) return;
+    var wm = { 0:{icon:'☀️',desc:'Clear sky'},1:{icon:'🌤️',desc:'Mainly clear'},2:{icon:'⛅',desc:'Partly cloudy'},3:{icon:'☁️',desc:'Overcast'},45:{icon:'🌫️',desc:'Foggy'},48:{icon:'🌫️',desc:'Icy fog'},51:{icon:'🌦️',desc:'Light drizzle'},53:{icon:'🌦️',desc:'Drizzle'},55:{icon:'🌧️',desc:'Heavy drizzle'},61:{icon:'🌧️',desc:'Light rain'},63:{icon:'🌧️',desc:'Rain'},65:{icon:'🌧️',desc:'Heavy rain'},66:{icon:'🌨️',desc:'Freezing rain'},67:{icon:'🌨️',desc:'Heavy freezing rain'},71:{icon:'🌨️',desc:'Light snow'},73:{icon:'❄️',desc:'Snow'},75:{icon:'❄️',desc:'Heavy snow'},77:{icon:'🌨️',desc:'Snow grains'},80:{icon:'🌦️',desc:'Light showers'},81:{icon:'🌧️',desc:'Showers'},82:{icon:'⛈️',desc:'Heavy showers'},85:{icon:'🌨️',desc:'Snow showers'},86:{icon:'🌨️',desc:'Heavy snow showers'},95:{icon:'⛈️',desc:'Thunderstorm'},96:{icon:'⛈️',desc:'Thunderstorm + hail'},99:{icon:'⛈️',desc:'Thunderstorm + heavy hail'} };
+    function updateTime() { timeEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Sofia', hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
+    function fetchWeather() {
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=42.6977&longitude=23.3219&current=temperature_2m,weather_code&timezone=Europe%2FSofia')
+            .then(function (r) { return r.json(); })
+            .then(function (d) { var w = wm[d.current.weather_code] || {icon:'🌡️',desc:'Unknown'}; iconEl.textContent = w.icon; descEl.textContent = w.desc; tempEl.textContent = Math.round(d.current.temperature_2m) + '°C'; })
+            .catch(function () { iconEl.textContent = '❓'; descEl.textContent = 'Could not load'; tempEl.textContent = '--°'; });
     }
-
-    // Recurring checks every 5 seconds, staggered
-    function recurringCheck() {
-        services.forEach(function (svc, i) {
-            setTimeout(function () {
-                checkService(svc, i);
-            }, i * 200);
-        });
-    }
-
-    initialCheck();
-    setInterval(recurringCheck, 5000);
+    updateTime(); setInterval(updateTime, 1000); fetchWeather(); setInterval(fetchWeather, 600000);
 })();

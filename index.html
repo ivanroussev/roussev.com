@@ -26,7 +26,6 @@
 
     <main class="bento-grid">
 
-        <!-- Profile tile -->
         <section class="tile tile-profile" aria-label="Profile">
             <img src="/ivan-pfp.jpg" alt="Ivan Roussev" class="avatar">
             <h1>Ivan Roussev</h1>
@@ -44,112 +43,24 @@
             </div>
         </section>
 
-        <!-- About tile -->
         <section class="tile tile-about" aria-label="About">
             <h2>About</h2>
             <p>DevOps Engineer with hands-on experience building and maintaining infrastructure, CI/CD pipelines, and container orchestration platforms. I like keeping things simple, automated, and well-monitored.</p>
         </section>
 
-        <!-- GitHub Activity tile -->
-        <section class="tile tile-github" aria-label="GitHub Activity">
-            <h2>GitHub</h2>
-            <div class="github-graph" id="github-graph" aria-label="Contribution graph"></div>
-            <p class="tile-footnote">Live from <a href="https://github.com/ivanroussev" target="_blank" rel="noopener">github.com/ivanroussev</a></p>
-        </section>
-
-        <!-- Infrastructure tile -->
-        <section class="tile tile-infra" aria-label="Infrastructure">
-            <h2>Infrastructure</h2>
-            <p class="tile-desc">This site runs on my self-hosted K8s cluster, managed entirely through GitOps.</p>
-            <div class="infra-diagram">
-                <div class="infra-layer">
-                    <span class="infra-label">Ingress</span>
-                    <div class="infra-nodes">
-                        <span class="infra-node" data-tip="Reverse proxy & ingress controller">Traefik</span>
-                        <span class="infra-node" data-tip="Load balancer for bare-metal K8s">MetalLB</span>
-                        <span class="infra-node" data-tip="TLS certificate automation">Cert-Manager</span>
-                    </div>
+        <section class="tile tile-weather" aria-label="Sofia Weather & Time">
+            <div class="weather-content">
+                <div class="weather-icon" id="weather-icon">⏳</div>
+                <div class="weather-info">
+                    <p class="weather-location">Sofia, Bulgaria</p>
+                    <p class="weather-time" id="weather-time">--:--</p>
+                    <p class="weather-desc" id="weather-desc">Loading...</p>
                 </div>
-                <div class="infra-arrow">↓</div>
-                <div class="infra-layer">
-                    <span class="infra-label">GitOps</span>
-                    <div class="infra-nodes">
-                        <span class="infra-node highlight" data-tip="App of Apps pattern, auto-sync">ArgoCD</span>
-                        <span class="infra-node" data-tip="Encrypt secrets in Git">Sealed Secrets</span>
-                    </div>
-                </div>
-                <div class="infra-arrow">↓</div>
-                <div class="infra-layer">
-                    <span class="infra-label">Workloads</span>
-                    <div class="infra-nodes">
-                        <span class="infra-node site-node" data-tip="You are here!">roussev.com</span>
-                        <span class="infra-node" data-tip="Wiki & docs platform">Docmost</span>
-                        <span class="infra-node" data-tip="Container registry">Harbor</span>
-                    </div>
-                </div>
-                <div class="infra-arrow">↓</div>
-                <div class="infra-layer">
-                    <span class="infra-label">Data</span>
-                    <div class="infra-nodes">
-                        <span class="infra-node" data-tip="Relational database">PostgreSQL</span>
-                        <span class="infra-node" data-tip="In-memory cache">Redis</span>
-                    </div>
-                </div>
-                <div class="infra-arrow">↓</div>
-                <div class="infra-layer">
-                    <span class="infra-label">Observability</span>
-                    <div class="infra-nodes">
-                        <span class="infra-node" data-tip="Metrics & alerting">Prometheus</span>
-                        <span class="infra-node" data-tip="Dashboards">Grafana</span>
-                        <span class="infra-node" data-tip="Log aggregation">Loki</span>
-                        <span class="infra-node" data-tip="Endpoint probing">Blackbox</span>
-                    </div>
-                </div>
-                <div class="infra-arrow">↓</div>
-                <div class="infra-layer">
-                    <span class="infra-label">Policy</span>
-                    <div class="infra-nodes">
-                        <span class="infra-node" data-tip="K8s policy engine">Kyverno</span>
-                    </div>
-                </div>
+                <div class="weather-temp" id="weather-temp">--°</div>
             </div>
         </section>
 
-        <!-- Status Dashboard tile (live healthchecks) -->
-        <section class="tile tile-status" aria-label="Status Dashboard">
-            <h2>Status</h2>
-            <div class="grafana-uptime">
-                <iframe src="https://grafana.roussev.com/d-solo/roussev-status-page/roussev-com-status-page?orgId=1&panelId=1&theme=dark&refresh=30s" title="Overall Uptime"></iframe>
-            </div>
-            <div class="healthcheck-grid" id="healthcheck-grid"></div>
-            <a href="https://grafana.roussev.com/d/roussev-status-page/roussev-com-status-page" target="_blank" rel="noopener" class="tile-link">View full dashboard on Grafana →</a>
-        </section>
-
-        <!-- Tech Stack tile -->
-        <section class="tile tile-stack" aria-label="Tech Stack">
-            <h2>Stack</h2>
-            <div class="stack-grid">
-                <span class="stack-item">Kubernetes</span>
-                <span class="stack-item">Docker</span>
-                <span class="stack-item">Helm</span>
-                <span class="stack-item">ArgoCD</span>
-                <span class="stack-item">Terraform</span>
-                <span class="stack-item">Python</span>
-                <span class="stack-item">Bash</span>
-                <span class="stack-item">Go</span>
-                <span class="stack-item">Nginx</span>
-                <span class="stack-item">Prometheus</span>
-                <span class="stack-item">Grafana</span>
-                <span class="stack-item">Loki</span>
-                <span class="stack-item">AWS</span>
-                <span class="stack-item">Azure DevOps</span>
-                <span class="stack-item">Git</span>
-                <span class="stack-item">Linux</span>
-            </div>
-        </section>
-
-        <!-- Experience tile -->
-        <section class="tile tile-experience" aria-label="Experience">
+        <section class="tile tile-experience" aria-label="Experience & Education">
             <h2>Experience</h2>
             <div class="timeline">
                 <div class="timeline-item">
@@ -177,9 +88,42 @@
                     </div>
                 </div>
             </div>
+            <h2 style="margin-top: 24px;">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div>
+                        <p class="timeline-role">Computer Information Technology</p>
+                        <p class="timeline-company">British Columbia Institute of Technology</p>
+                        <p class="timeline-date">2021 – 2023</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <div>
+                        <p class="timeline-role">Double Dogwood Diploma</p>
+                        <p class="timeline-company">South Delta Secondary</p>
+                        <p class="timeline-date">2016 – 2021</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- Blog tile -->
+        <section class="tile tile-status" aria-label="Status Dashboard">
+            <h2>Status</h2>
+            <div class="grafana-uptime">
+                <iframe src="https://grafana.roussev.com/d-solo/roussev-status-page/roussev-com-status-page?orgId=1&panelId=1&theme=dark&refresh=30s" title="Overall Uptime"></iframe>
+            </div>
+            <div class="healthcheck-grid" id="healthcheck-grid"></div>
+            <a href="https://grafana.roussev.com/d/roussev-status-page/roussev-com-status-page" target="_blank" rel="noopener" class="tile-link">View full dashboard on Grafana →</a>
+        </section>
+
+        <section class="tile tile-github" aria-label="GitHub Activity">
+            <h2>GitHub</h2>
+            <div class="github-graph" id="github-graph" aria-label="Contribution graph"></div>
+            <p class="tile-footnote"><a href="https://github.com/ivanroussev" target="_blank" rel="noopener">github.com/ivanroussev</a></p>
+        </section>
+
         <section class="tile tile-blog" aria-label="Latest Blog">
             <h2>Blog</h2>
             <div class="blog-placeholder">
@@ -189,7 +133,6 @@
             <a href="/blogs" class="tile-link">View all →</a>
         </section>
 
-        <!-- Certifications tile -->
         <section class="tile tile-certs" aria-label="Certifications">
             <h2>Certs</h2>
             <div class="cert-badge">
@@ -201,26 +144,24 @@
             </div>
         </section>
 
-        <!-- Now tile -->
-        <section class="tile tile-now" aria-label="Currently Working On">
-            <h2>Now</h2>
-            <ul class="now-list">
-                <li>Building out this portfolio redesign</li>
-                <li>Expanding my homelab K8s cluster</li>
-                <li>Writing my first blog posts</li>
-            </ul>
-        </section>
-
-        <!-- Education tile -->
-        <section class="tile tile-education" aria-label="Education">
-            <h2>Education</h2>
-            <div class="edu-item">
-                <p class="edu-school">British Columbia Institute of Technology</p>
-                <p class="edu-program">Computer Information Technology · 2021–2023</p>
+        <section class="tile tile-infra" aria-label="Infrastructure">
+            <h2>Infrastructure</h2>
+            <p class="tile-desc">Self-hosted K8s cluster, managed via GitOps</p>
+            <div class="infra-diagram">
+                <div class="infra-layer"><span class="infra-label">Ingress</span><div class="infra-nodes"><span class="infra-node" data-tip="Reverse proxy & ingress controller">Traefik</span><span class="infra-node" data-tip="Load balancer for bare-metal K8s">MetalLB</span><span class="infra-node" data-tip="TLS certificate automation">Cert-Manager</span></div></div>
+                <div class="infra-arrow">↓</div>
+                <div class="infra-layer"><span class="infra-label">GitOps</span><div class="infra-nodes"><span class="infra-node highlight" data-tip="App of Apps pattern, auto-sync">ArgoCD</span><span class="infra-node" data-tip="Encrypt secrets in Git">Sealed Secrets</span></div></div>
+                <div class="infra-arrow">↓</div>
+                <div class="infra-layer"><span class="infra-label">Workloads</span><div class="infra-nodes"><span class="infra-node site-node" data-tip="You are here!">roussev.com</span><span class="infra-node" data-tip="Wiki & docs">Docmost</span><span class="infra-node" data-tip="Container registry">Harbor</span></div></div>
+                <div class="infra-arrow">↓</div>
+                <div class="infra-layer"><span class="infra-label">Data</span><div class="infra-nodes"><span class="infra-node" data-tip="Relational database">PostgreSQL</span><span class="infra-node" data-tip="In-memory cache">Redis</span></div></div>
+                <div class="infra-arrow">↓</div>
+                <div class="infra-layer"><span class="infra-label">Observability</span><div class="infra-nodes"><span class="infra-node" data-tip="Metrics & alerting">Prometheus</span><span class="infra-node" data-tip="Dashboards">Grafana</span><span class="infra-node" data-tip="Log aggregation">Loki</span><span class="infra-node" data-tip="Endpoint probing">Blackbox</span></div></div>
+                <div class="infra-arrow">↓</div>
+                <div class="infra-layer"><span class="infra-label">Policy</span><div class="infra-nodes"><span class="infra-node" data-tip="K8s policy engine">Kyverno</span></div></div>
             </div>
         </section>
 
-        <!-- Contact tile -->
         <section class="tile tile-contact" aria-label="Contact">
             <h2>Let's connect</h2>
             <div class="contact-links">
