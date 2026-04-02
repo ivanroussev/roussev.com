@@ -101,8 +101,10 @@ a:hover { text-decoration: underline; }
 .weather-temp { font-size: 28px; font-weight: 300; color: var(--text); letter-spacing: -1px; flex-shrink: 0; }
 
 /* === GITHUB GRAPH === */
-.github-graph { display: grid; grid-template-columns: repeat(52, 1fr); gap: 3px; min-height: 80px; }
-.gh-cell { aspect-ratio: 1; border-radius: 3px; background: var(--border); transition: background 0.15s; }
+.tile-github { padding: 16px; }
+.tile-github h2 { margin-bottom: 10px; }
+.github-graph { display: grid; grid-template-columns: repeat(20, 1fr); gap: 2px; }
+.gh-cell { aspect-ratio: 1; border-radius: 2px; background: var(--border); transition: background 0.15s; }
 .gh-cell[data-level="1"] { background: #1a2e1a; }
 .gh-cell[data-level="2"] { background: #1e5a2e; }
 .gh-cell[data-level="3"] { background: #2d8a4e; }
@@ -136,25 +138,78 @@ a:hover { text-decoration: underline; }
 .hc-badge.up { background: var(--green-soft); color: var(--green); }
 .hc-badge.down { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
 
-/* === INFRA DIAGRAM === */
-.infra-diagram { display: flex; flex-direction: column; gap: 4px; }
-.infra-layer { display: flex; align-items: center; gap: 12px; }
-.infra-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); min-width: 90px; text-align: right; }
-.infra-nodes { display: flex; flex-wrap: wrap; gap: 6px; }
-.infra-node { font-size: 12px; font-weight: 500; padding: 4px 10px; background: var(--accent-soft); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 6px; color: var(--text); cursor: default; position: relative; transition: background 0.2s, border-color 0.2s; }
-.infra-node:hover { background: rgba(59, 130, 246, 0.15); border-color: var(--accent); }
-.infra-node.highlight { background: var(--green-soft); border-color: rgba(34, 197, 94, 0.3); }
-.infra-node.highlight:hover { border-color: var(--green); }
-.infra-node.site-node { background: var(--green-soft); border-color: var(--green); color: var(--green); font-weight: 600; }
-.infra-node:hover::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); padding: 4px 10px; background: var(--text); color: var(--bg); font-size: 11px; font-weight: 400; border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 10; }
-.infra-arrow { text-align: center; color: var(--text-muted); font-size: 14px; padding-left: 102px; line-height: 1; }
+/* === INFRA FLOW === */
+.infra-flow {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+.infra-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 0;
+}
+.infra-group-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+}
+.infra-chips {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+.infra-chip {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 6px;
+    color: var(--text);
+    white-space: nowrap;
+    transition: border-color 0.2s, transform 0.15s;
+}
+.infra-chip:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+.infra-chip.accent {
+    background: var(--green-soft);
+    border-color: rgba(34, 197, 94, 0.25);
+}
+.infra-chip.accent:hover { border-color: var(--green); }
+.infra-chip.green {
+    background: var(--green-soft);
+    border-color: var(--green);
+    color: var(--green);
+    font-weight: 600;
+}
+.infra-flow-arrow {
+    font-size: 16px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    margin-top: 22px;
+}
 
 /* === MISC TILES === */
 .blog-placeholder { text-align: center; padding: 20px 0; color: var(--text-muted); }
 .blog-placeholder-icon { font-size: 28px; display: block; margin-bottom: 6px; }
 .blog-placeholder p { font-size: 13px; }
+.blog-card { display: block; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); text-decoration: none; transition: border-color 0.2s; }
+.blog-card:hover { border-color: var(--accent); text-decoration: none; }
+.blog-card-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.blog-card-source { font-size: 11px; color: var(--text-muted); }
 .cert-badge { display: flex; align-items: center; gap: 12px; }
-.cert-icon { font-size: 32px; }
+.cert-aws-icon { flex-shrink: 0; }
 .cert-name { font-weight: 600; font-size: 14px; }
 .cert-issuer { font-size: 12px; color: var(--text-muted); }
 .now-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
@@ -189,9 +244,8 @@ a:hover { text-decoration: underline; }
     .bento-grid { grid-template-columns: 1fr; padding: 0 12px 32px; }
     .bento-grid .tile { grid-column: 1 !important; grid-row: auto !important; }
     .site-header { padding: 16px; }
-    .infra-label { min-width: 70px; font-size: 10px; }
-    .infra-arrow { padding-left: 82px; }
     .weather-info { flex-wrap: wrap; gap: 8px; }
+    .infra-flow { flex-wrap: wrap; justify-content: center; }
 }
 
 /* === PAGES (projects/blog) === */

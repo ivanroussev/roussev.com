@@ -33,11 +33,11 @@ function updateGrafanaTheme() {
 (function () {
     var graph = document.getElementById('github-graph');
     if (!graph) return;
-    for (var w = 0; w < 52; w++) {
+    for (var w = 0; w < 20; w++) {
         var col = document.createElement('div');
         col.style.display = 'flex';
         col.style.flexDirection = 'column';
-        col.style.gap = '3px';
+        col.style.gap = '2px';
         for (var d = 0; d < 7; d++) {
             var cell = document.createElement('div');
             cell.className = 'gh-cell';
