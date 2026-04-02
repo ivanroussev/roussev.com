@@ -115,6 +115,16 @@
             </div>
         </section>
 
+        <!-- Status Dashboard tile (live healthchecks) -->
+        <section class="tile tile-status" aria-label="Status Dashboard">
+            <h2>Status</h2>
+            <div class="grafana-uptime">
+                <iframe src="https://grafana.roussev.com/d-solo/roussev-status-page/roussev-com-status-page?orgId=1&panelId=1&theme=dark&refresh=30s" title="Overall Uptime"></iframe>
+            </div>
+            <div class="healthcheck-grid" id="healthcheck-grid"></div>
+            <a href="https://grafana.roussev.com/d/roussev-status-page/roussev-com-status-page" target="_blank" rel="noopener" class="tile-link">View full dashboard on Grafana →</a>
+        </section>
+
         <!-- Tech Stack tile -->
         <section class="tile tile-stack" aria-label="Tech Stack">
             <h2>Stack</h2>
