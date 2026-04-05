@@ -7,76 +7,38 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div class="file-header">
-        <span class="file-icon">📄</span>
-        <span class="file-name">PROJECTS.md</span>
-        <label class="toggle-switch" title="Toggle light/dark mode">
-            <input type="checkbox" onchange="toggleTheme()">
-            <span class="toggle-slider">
-                <span class="toggle-icon toggle-icon--dark">🌙</span>
-                <span class="toggle-icon toggle-icon--light">☀️</span>
-            </span>
-        </label>
+    <header class="site-header">
+        <a href="/" class="logo">ir<span class="logo-dot">.</span></a>
+        <nav class="nav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/projects" class="nav-link active">Projects</a>
+            <a href="/blogs" class="nav-link">Blog</a>
+        </nav>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+    </header>
+
+    <div class="page-header">
+        <h1>Projects</h1>
+        <p>Things I've built, contributed to, or am currently working on.</p>
     </div>
 
-    <nav class="repo-nav">
-        <a href="/" class="repo-nav-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"/></svg>
-            <span>README</span>
-        </a>
-        <a href="/projects" class="repo-nav-item active">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25V1.75C0 .784.784 0 1.75 0ZM1.5 1.75v12.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25ZM11.75 3a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 .75-.75Zm-8.25.75a.75.75 0 0 1 1.5 0v5.5a.75.75 0 0 1-1.5 0ZM8 3a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 3Z"/></svg>
-            <span>Projects</span>
-        </a>
-        <a href="/blogs" class="repo-nav-item">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm10.5 2.75a.75.75 0 0 1-.75.75h-8.5a.75.75 0 0 1 0-1.5h8.5a.75.75 0 0 1 .75.75Zm0 3a.75.75 0 0 1-.75.75h-8.5a.75.75 0 0 1 0-1.5h8.5a.75.75 0 0 1 .75.75Z"/></svg>
-            <span>Blog</span>
-        </a>
-    </nav>
-
-    <article class="markdown-body">
-
-        <nav class="breadcrumb">
-            <a href="/">README.md</a> / <span>PROJECTS.md</span>
-        </nav>
-
-        <h1>Projects</h1>
-        <p>A collection of things I've built, contributed to, or am currently working on.</p>
-
-        <hr>
-
-        <h2>Infrastructure &amp; DevOps</h2>
-
-        <div class="project-card">
-            <h3><a href="https://github.com/ivanroussev" target="_blank" rel="noopener">roussev.com</a></h3>
-            <p>This personal website — containerised with Docker, served by Nginx, and deployed with a simple CI/CD pipeline.</p>
-            <div class="project-tags">
-                <span class="tag">Docker</span>
-                <span class="tag">Nginx</span>
-                <span class="tag">HTML/CSS</span>
-            </div>
+    <div class="page-content">
+        <div style="text-align: center; padding: 60px 0; color: var(--text-muted);">
+            <p>Projects coming soon. Stay tuned.</p>
         </div>
+    </div>
 
-        <!-- Add more project cards here as you build things -->
-        <!--
-        <div class="project-card">
-            <h3><a href="#">Project Name</a></h3>
-            <p>Short description of the project.</p>
-            <div class="project-tags">
-                <span class="tag">Tag1</span>
-                <span class="tag">Tag2</span>
-            </div>
-        </div>
-        -->
+    <footer class="site-footer">
+        <p>Deployed on K8s via ArgoCD</p>
+    </footer>
 
-        <h2>Coming Soon</h2>
-        <p>More projects are on the way. Check back later or follow me on <a href="https://github.com/ivanroussev" target="_blank" rel="noopener">GitHub</a> to stay updated.</p>
-
-    </article>
-    <script src="/script.js?v=2"></script>
+    <script src="/script.js"></script>
 </body>
 </html>

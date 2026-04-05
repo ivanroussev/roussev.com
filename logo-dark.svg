@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" rx="32" fill="#0a0a0a"/>
+  <text x="100" y="125" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="88" font-weight="700" letter-spacing="-2" fill="#e5e5e5">ir</text>
+  <text x="143" y="125" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="88" font-weight="700" fill="#3b82f6">.</text>
+</svg>
