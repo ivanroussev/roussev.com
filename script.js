@@ -63,15 +63,22 @@ function updateGrafanaTheme() {
         { name: 'grafana', url: 'https://grafana.roussev.com' },
         { name: 'argocd', url: 'https://argo.roussev.com' },
         { name: 'docmost', url: 'https://docs.roussev.com' },
-        { name: 'harbor', url: 'https://harbor.roussev.com' },
-        { name: 'traefik', url: 'https://traefik.roussev.com' }
+        { name: 'harbor', url: 'https://harbor.roussev.com' }
     ];
     var tiles = {};
     function createTile(svc, index) {
         var tile = document.createElement('div');
         tile.className = 'hc-tile';
         tile.style.animationDelay = (index * 150) + 'ms';
-        tile.innerHTML = '<span class="hc-dot pending"></span><span class="hc-name">' + svc.name + '</span><span class="hc-ms">—</span><span class="hc-badge">checking</span>';
+        var domain = svc.url.replace('https://', '');
+        var nameHtml;
+        if (domain === 'roussev.com') {
+            nameHtml = 'roussev<span class="hc-domain">.com</span>';
+        } else {
+            var sub = domain.replace('.roussev.com', '');
+            nameHtml = sub + '<span class="hc-domain">.roussev.com</span>';
+        }
+        tile.innerHTML = '<span class="hc-dot pending"></span><span class="hc-name">' + nameHtml + '</span><span class="hc-ms">—</span><span class="hc-badge">checking</span>';
         return tile;
     }
     function checkService(svc, index) {
