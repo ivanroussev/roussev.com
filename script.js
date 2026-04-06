@@ -180,3 +180,41 @@ function updateGrafanaTheme() {
 
     loadDeployMeta();
 })();
+
+/* Homepage hero scroll handoff */
+(function () {
+    var hero = document.querySelector('.hero-profile');
+    var main = document.getElementById('main-content');
+    var arrow = document.querySelector('.hero-scroll');
+    if (!hero || !main) return;
+
+    function goToMain() {
+        main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (arrow) {
+        arrow.addEventListener('click', function (e) {
+            e.preventDefault();
+            goToMain();
+        });
+    }
+
+    var locking = false;
+    window.addEventListener('wheel', function (e) {
+        if (locking) return;
+        if (window.scrollY > 8) return;
+        if (e.deltaY <= 6) return;
+        locking = true;
+        e.preventDefault();
+        goToMain();
+        setTimeout(function () { locking = false; }, 900);
+    }, { passive: false });
+
+    window.addEventListener('keydown', function (e) {
+        if (window.scrollY > 8) return;
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+            e.preventDefault();
+            goToMain();
+        }
+    });
+})();

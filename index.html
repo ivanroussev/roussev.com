@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
-<body>
+<body class="home-page">
     <header class="site-header">
         <a href="/" class="logo">ir<span class="logo-dot">.</span></a>
         <nav class="nav">
@@ -24,12 +24,16 @@
         </button>
     </header>
 
-    <main class="bento-grid">
-
-        <section class="tile tile-profile" aria-label="Profile">
-            <img src="/ivan-pfp.jpg" alt="Ivan Roussev" class="avatar">
-            <h1>Ivan Roussev</h1>
-            <p class="subtitle">DevOps Engineer · Sofia, Bulgaria</p>
+    <section class="hero-profile" aria-label="Profile">
+        <div class="hero-profile-photo">
+            <div class="avatar-frame">
+                <img src="/ivan-pfp.jpg" alt="Ivan Roussev" class="avatar">
+            </div>
+        </div>
+        <div class="hero-profile-content">
+            <h1 class="profile-name">Ivan Roussev</h1>
+            <p class="profile-role">DevOps Engineer</p>
+            <p class="profile-location">Sofia, Bulgaria</p>
             <div class="social-row">
                 <a href="mailto:ivan@roussev.com" aria-label="Email">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -41,7 +45,11 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05a3.74 3.74 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77A1.75 1.75 0 0 0 0 1.73v20.54A1.75 1.75 0 0 0 1.77 24h20.45A1.75 1.75 0 0 0 24 22.27V1.73A1.75 1.75 0 0 0 22.22 0z"/></svg>
                 </a>
             </div>
-        </section>
+        </div>
+        <a href="#main-content" class="hero-scroll" aria-label="Scroll down to main content">↓</a>
+    </section>
+
+    <main id="main-content" class="bento-grid">
 
         <section class="tile tile-about" aria-label="About">
             <h2>About</h2>
