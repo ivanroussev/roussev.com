@@ -161,9 +161,11 @@ a:hover { text-decoration: underline; }
 }
 .profile-role {
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--text);
+    opacity: 0.9;
+    letter-spacing: 0.2px;
     background: none;
     border: 0;
     border-radius: 0;
@@ -556,9 +558,20 @@ a:hover { text-decoration: underline; }
     .tile-contact { grid-column: 2; grid-row: auto; }
 }
 @media (max-width: 600px) {
-    .hero-profile { padding: 72px 12px 36px; gap: 12px; align-items: center; min-height: 100dvh; }
+    .hero-profile {
+        padding: 72px 12px 36px;
+        gap: 14px;
+        min-height: 100dvh;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    .hero-profile-content { align-items: center; }
+    .hero-profile .social-row { justify-content: center; }
     .avatar-frame { width: 150px; height: 150px; }
-    .profile-name { font-size: 32px; line-height: 1; }
+    .profile-name { font-size: 34px; line-height: 1; margin-bottom: 8px; }
+    .profile-role { margin-bottom: 6px; }
+    .profile-location { margin-bottom: 12px; }
     .bento-grid { grid-template-columns: 1fr; padding: 14px 12px 32px; scroll-margin-top: 64px; }
     .bento-grid .tile { grid-column: 1 !important; grid-row: auto !important; }
     .tile-release { order: 98; }
