@@ -114,3 +114,51 @@ function updateGrafanaTheme() {
     }
     updateTime(); setInterval(updateTime, 1000); fetchWeather(); setInterval(fetchWeather, 600000);
 })();
+
+/* Deploy ticker */
+(function () {
+    var tickerEl = document.getElementById('deploy-ticker-text');
+    if (!tickerEl) return;
+
+    function formatRelativeTime(iso) {
+        var then = new Date(iso).getTime();
+        if (!then || isNaN(then)) return 'unknown';
+        var diffMs = Date.now() - then;
+        if (diffMs < 0) diffMs = 0;
+        var sec = Math.floor(diffMs / 1000);
+        if (sec < 60) return sec + 's ago';
+        var min = Math.floor(sec / 60);
+        if (min < 60) return min + 'm ago';
+        var hr = Math.floor(min / 60);
+        if (hr < 24) return hr + 'h ago';
+        var day = Math.floor(hr / 24);
+        return day + 'd ago';
+    }
+
+    function render(meta) {
+        var at = meta && meta.deployed_at ? meta.deployed_at : null;
+        if (!at) {
+            tickerEl.textContent = 'Last deploy: unavailable';
+            return;
+        }
+        var parts = ['Last deploy: ' + formatRelativeTime(at)];
+        if (meta && meta.image_tag) parts.push('tag ' + meta.image_tag);
+        if (meta && meta.commit_short) parts.push(meta.commit_short);
+        tickerEl.textContent = parts.join(' · ');
+        tickerEl.title = 'Deployed at ' + at + (meta && meta.image_ref ? ('\n' + meta.image_ref) : '');
+    }
+
+    function loadDeployMeta() {
+        fetch('/build-info.json?ts=' + Date.now(), { cache: 'no-store' })
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('missing')); })
+            .then(function (meta) {
+                render(meta);
+                setInterval(function () { render(meta); }, 60000);
+            })
+            .catch(function () {
+                tickerEl.textContent = 'Last deploy: unavailable';
+            });
+    }
+
+    loadDeployMeta();
+})();
