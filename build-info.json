@@ -1,0 +1,10 @@
+{
+  "deployed_at": "1970-01-01T00:00:00Z",
+  "commit_short": "local",
+  "image_repo": "ghcr.io/ivanroussev/roussev.com",
+  "image_tag": "local-dev",
+  "image_ref": "ghcr.io/ivanroussev/roussev.com:local-dev",
+  "source_ref": "local",
+  "commit_sha": "local-dev",
+  "source": "local"
+}

@@ -3,6 +3,8 @@ name: Build and Push Docker Image
 on:
   push:
     branches: [main]
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 env:
@@ -34,8 +36,28 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=sha
-            type=raw,value=latest
+            type=semver,pattern={{version}},priority=900
+            type=semver,pattern={{major}}.{{minor}},priority=800
+            type=semver,pattern={{major}},priority=700
+            type=ref,event=branch,priority=600
+            type=sha,format=short,prefix=sha-,priority=500
+            type=raw,value=latest,enable={{is_default_branch}},priority=100
+
+      - name: Generate build metadata file
+        run: |
+          COMMIT_SHORT="${GITHUB_SHA::7}"
+          cat > build-info.json <<EOF
+          {
+            "deployed_at": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+            "commit_sha": "${{ github.sha }}",
+            "commit_short": "${COMMIT_SHORT}",
+            "image_repo": "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}",
+            "image_tag": "${{ steps.meta.outputs.version }}",
+            "image_ref": "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}",
+            "source_ref": "${{ github.ref_name }}",
+            "source": "github-actions"
+          }
+          EOF
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
