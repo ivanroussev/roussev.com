@@ -94,31 +94,13 @@ function updateGrafanaTheme() {
     setInterval(function () { services.forEach(function (svc, i) { setTimeout(function () { checkService(svc, i); }, i * 200); }); }, 5000);
 })();
 
-/* Sofia weather + time */
+/* Release showcase */
 (function () {
-    var iconEl = document.getElementById('weather-icon'), timeEl = document.getElementById('weather-time'), descEl = document.getElementById('weather-desc'), tempEl = document.getElementById('weather-temp');
-    if (!iconEl) return;
-    var wm = { 0:{day:'☀️',night:'🌙',desc:'Clear sky'},1:{day:'🌤️',night:'🌙',desc:'Mainly clear'},2:{day:'⛅',night:'☁️',desc:'Partly cloudy'},3:{day:'☁️',night:'☁️',desc:'Overcast'},45:{day:'🌫️',night:'🌫️',desc:'Foggy'},48:{day:'🌫️',night:'🌫️',desc:'Icy fog'},51:{day:'🌦️',night:'🌦️',desc:'Light drizzle'},53:{day:'🌦️',night:'🌦️',desc:'Drizzle'},55:{day:'🌧️',night:'🌧️',desc:'Heavy drizzle'},61:{day:'🌧️',night:'🌧️',desc:'Light rain'},63:{day:'🌧️',night:'🌧️',desc:'Rain'},65:{day:'🌧️',night:'🌧️',desc:'Heavy rain'},66:{day:'🌨️',night:'🌨️',desc:'Freezing rain'},67:{day:'🌨️',night:'🌨️',desc:'Heavy freezing rain'},71:{day:'🌨️',night:'🌨️',desc:'Light snow'},73:{day:'❄️',night:'❄️',desc:'Snow'},75:{day:'❄️',night:'❄️',desc:'Heavy snow'},77:{day:'🌨️',night:'🌨️',desc:'Snow grains'},80:{day:'🌦️',night:'🌦️',desc:'Light showers'},81:{day:'🌧️',night:'🌧️',desc:'Showers'},82:{day:'⛈️',night:'⛈️',desc:'Heavy showers'},85:{day:'🌨️',night:'🌨️',desc:'Snow showers'},86:{day:'🌨️',night:'🌨️',desc:'Heavy snow showers'},95:{day:'⛈️',night:'⛈️',desc:'Thunderstorm'},96:{day:'⛈️',night:'⛈️',desc:'Thunderstorm + hail'},99:{day:'⛈️',night:'⛈️',desc:'Thunderstorm + heavy hail'} };
-    function updateTime() { timeEl.textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Europe/Sofia', hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
-    function fetchWeather() {
-        fetch('https://api.open-meteo.com/v1/forecast?latitude=42.6977&longitude=23.3219&current=temperature_2m,weather_code,is_day&timezone=Europe%2FSofia')
-            .then(function (r) { return r.json(); })
-            .then(function (d) {
-                var isDay = d && d.current && d.current.is_day === 1;
-                var w = wm[d.current.weather_code] || { day: '🌡️', night: '🌡️', desc: 'Unknown' };
-                iconEl.textContent = isDay ? w.day : w.night;
-                descEl.textContent = w.desc;
-                tempEl.textContent = Math.round(d.current.temperature_2m) + '°C';
-            })
-            .catch(function () { iconEl.textContent = '❓'; descEl.textContent = 'Could not load'; tempEl.textContent = '--°'; });
-    }
-    updateTime(); setInterval(updateTime, 1000); fetchWeather(); setInterval(fetchWeather, 600000);
-})();
-
-/* Deploy ticker */
-(function () {
-    var tickerEl = document.getElementById('deploy-ticker-text');
-    if (!tickerEl) return;
+    var timeEl = document.getElementById('deploy-time-text');
+    var tagEl = document.getElementById('deploy-tag-link');
+    var commitEl = document.getElementById('deploy-commit-link');
+    var repoEl = document.getElementById('deploy-repo-link');
+    if (!timeEl || !tagEl || !commitEl || !repoEl) return;
 
     function formatRelativeTime(iso) {
         var then = new Date(iso).getTime();
@@ -138,14 +120,48 @@ function updateGrafanaTheme() {
     function render(meta) {
         var at = meta && meta.deployed_at ? meta.deployed_at : null;
         if (!at) {
-            tickerEl.textContent = 'Last deploy: unavailable';
+            timeEl.textContent = 'Latest release info unavailable';
             return;
         }
-        var parts = ['Last deploy: ' + formatRelativeTime(at)];
-        if (meta && meta.image_tag) parts.push('tag ' + meta.image_tag);
-        if (meta && meta.commit_short) parts.push(meta.commit_short);
-        tickerEl.textContent = parts.join(' · ');
-        tickerEl.title = 'Deployed at ' + at + (meta && meta.image_ref ? ('\n' + meta.image_ref) : '');
+        var tagText = meta && meta.image_tag ? meta.image_tag : '--';
+        var commitText = meta && meta.commit_short ? meta.commit_short : '--';
+        var tagUrl = meta && meta.tag_url ? meta.tag_url : null;
+        var repoUrl = meta && meta.repo_url ? meta.repo_url : null;
+        var commitUrl = meta && meta.commit_url
+            ? meta.commit_url
+            : (repoUrl && meta && meta.commit_sha ? (repoUrl + '/commit/' + meta.commit_sha) : null);
+
+        timeEl.textContent = 'Deployed ' + formatRelativeTime(at);
+        timeEl.title = 'Deployed at ' + at + (meta && meta.image_ref ? ('\n' + meta.image_ref) : '');
+
+        tagEl.textContent = 'tag: ' + tagText;
+        if (tagUrl) {
+            tagEl.href = tagUrl;
+            tagEl.style.pointerEvents = '';
+            tagEl.setAttribute('aria-disabled', 'false');
+        } else {
+            tagEl.removeAttribute('href');
+            tagEl.style.pointerEvents = 'none';
+            tagEl.setAttribute('aria-disabled', 'true');
+        }
+
+        commitEl.textContent = 'commit: ' + commitText;
+        if (commitUrl) {
+            commitEl.href = commitUrl;
+            commitEl.style.pointerEvents = '';
+            commitEl.setAttribute('aria-disabled', 'false');
+        } else {
+            commitEl.removeAttribute('href');
+            commitEl.style.pointerEvents = 'none';
+            commitEl.setAttribute('aria-disabled', 'true');
+        }
+
+        if (repoUrl) {
+            repoEl.href = repoUrl;
+            repoEl.style.display = 'inline-block';
+        } else {
+            repoEl.style.display = 'none';
+        }
     }
 
     function loadDeployMeta() {
@@ -156,7 +172,9 @@ function updateGrafanaTheme() {
                 setInterval(function () { render(meta); }, 60000);
             })
             .catch(function () {
-                tickerEl.textContent = 'Last deploy: unavailable';
+                timeEl.textContent = 'Latest release info unavailable';
+                tagEl.textContent = 'tag: --';
+                commitEl.textContent = 'commit: --';
             });
     }
 

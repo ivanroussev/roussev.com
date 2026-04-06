@@ -46,6 +46,11 @@ jobs:
       - name: Generate build metadata file
         run: |
           COMMIT_SHORT="${GITHUB_SHA::7}"
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            TAG_URL="https://github.com/${{ github.repository }}/releases/tag/${{ github.ref_name }}"
+          else
+            TAG_URL="https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}"
+          fi
           cat > build-info.json <<EOF
           {
             "deployed_at": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
@@ -54,6 +59,9 @@ jobs:
             "image_repo": "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}",
             "image_tag": "${{ steps.meta.outputs.version }}",
             "image_ref": "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}",
+            "tag_url": "${TAG_URL}",
+            "repo_url": "https://github.com/${{ github.repository }}",
+            "commit_url": "https://github.com/${{ github.repository }}/commit/${{ github.sha }}",
             "source_ref": "${{ github.ref_name }}",
             "source": "github-actions"
           }

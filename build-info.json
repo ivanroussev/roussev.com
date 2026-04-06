@@ -4,6 +4,9 @@
   "image_repo": "ghcr.io/ivanroussev/roussev.com",
   "image_tag": "local-dev",
   "image_ref": "ghcr.io/ivanroussev/roussev.com:local-dev",
+  "tag_url": "https://github.com/ivanroussev/roussev.com/tree/main",
+  "repo_url": "https://github.com/ivanroussev/roussev.com",
+  "commit_url": "https://github.com/ivanroussev/roussev.com/commit/local-dev",
   "source_ref": "local",
   "commit_sha": "local-dev",
   "source": "local"

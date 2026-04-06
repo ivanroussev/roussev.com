@@ -69,14 +69,14 @@ a:hover { text-decoration: underline; }
 /* === GRID LAYOUT === */
 .tile-profile { grid-column: 1; grid-row: 1; text-align: center; }
 .tile-about { grid-column: 2 / 4; grid-row: 1; }
-.tile-weather { grid-column: 1 / 4; grid-row: 2; }
+.tile-release { grid-column: 1 / 4; grid-row: 7; }
 .tile-experience { grid-column: 1 / 3; grid-row: 3 / 5; }
 .tile-status { grid-column: 3; grid-row: 3 / 5; }
 .tile-github { grid-column: 3; grid-row: 5; }
 .tile-blog { grid-column: 1; grid-row: 5; }
 .tile-certs { grid-column: 2; grid-row: 5; }
 .tile-infra { grid-column: 1 / 4; grid-row: 6; }
-.tile-contact { grid-column: 1 / 4; grid-row: 7; }
+.tile-contact { grid-column: 1 / 4; grid-row: 8; }
 
 /* === PROFILE === */
 .avatar { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--border); object-fit: cover; margin-bottom: 12px; }
@@ -90,39 +90,60 @@ a:hover { text-decoration: underline; }
 .tile-about { display: flex; flex-direction: column; justify-content: center; }
 .tile-about p { font-size: 16px; line-height: 1.7; color: var(--text); }
 
-/* === WEATHER === */
-.tile-weather { padding: 14px 24px; }
-.weather-content { display: flex; align-items: center; gap: 16px; }
-.weather-icon { font-size: 32px; line-height: 1; flex-shrink: 0; }
-.weather-info { flex: 1; display: flex; align-items: center; gap: 16px; }
-.weather-location { font-size: 14px; font-weight: 600; color: var(--text); }
-.weather-time { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; font-family: 'SFMono-Regular', Consolas, monospace; }
-.weather-desc { font-size: 13px; color: var(--text-muted); text-transform: capitalize; }
-.weather-temp { font-size: 28px; font-weight: 300; color: var(--text); letter-spacing: -1px; flex-shrink: 0; }
-.deploy-ticker {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
+/* === RELEASE TILE === */
+.tile-release {
+    min-height: 0;
+    padding: 12px 16px;
+    background: var(--bg-tile);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.release-head {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 12px;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.release-head h2 { margin-bottom: 0; }
+.release-live {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--green);
+    background: var(--green-soft);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    border-radius: 999px;
+    padding: 3px 8px;
+}
+.release-time {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+}
+.release-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.release-chip {
+    font-size: 10px;
+    font-weight: 500;
     color: var(--text-muted);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 3px 8px;
+    text-decoration: none;
 }
-.deploy-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35);
-    animation: deployPulse 2s ease infinite;
-    flex-shrink: 0;
+.release-chip:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    text-decoration: none;
 }
-@keyframes deployPulse {
-    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35); }
-    70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-}
+.tile-release .tile-link { margin-top: 8px; font-size: 12px; }
 
 /* === GITHUB GRAPH === */
 .tile-github { padding: 16px; }
@@ -429,7 +450,7 @@ a:hover { text-decoration: underline; }
     .bento-grid { grid-template-columns: repeat(2, 1fr); padding: 0 16px 40px; }
     .tile-profile { grid-column: 1; grid-row: auto; }
     .tile-about { grid-column: 2; grid-row: auto; }
-    .tile-weather { grid-column: 1 / 3; grid-row: auto; }
+    .tile-release { grid-column: 1 / 3; grid-row: auto; }
     .tile-experience { grid-column: 1 / 3; grid-row: auto; }
     .tile-status { grid-column: 1 / 3; grid-row: auto; }
     .tile-education { grid-column: 1 / 3; grid-row: auto; }
@@ -444,7 +465,7 @@ a:hover { text-decoration: underline; }
     .bento-grid { grid-template-columns: 1fr; padding: 0 12px 32px; }
     .bento-grid .tile { grid-column: 1 !important; grid-row: auto !important; }
     .site-header { padding: 16px; }
-    .weather-info { flex-wrap: wrap; gap: 8px; }
+    .tile-release { min-height: auto; padding: 14px 16px; }
     .infra-diagram {
         display: flex;
         flex-direction: column;
