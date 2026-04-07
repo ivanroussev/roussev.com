@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ivan Roussev — Projects</title>
+    <meta name="description" content="Projects by Ivan Roussev: infrastructure, DevOps, Kubernetes, GitOps, and platform engineering work.">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <link rel="canonical" href="https://roussev.com/projects">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roussev.com/projects">
+    <meta property="og:title" content="Ivan Roussev — Projects">
+    <meta property="og:description" content="Infrastructure and DevOps projects by Ivan Roussev.">
+    <meta property="og:image" content="https://roussev.com/ivan-pfp.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ivan Roussev — Projects">
+    <meta name="twitter:description" content="Infrastructure and DevOps projects by Ivan Roussev.">
+    <meta name="twitter:image" content="https://roussev.com/ivan-pfp.jpg">
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +26,12 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <header class="site-header">
         <a href="/" class="logo">ir<span class="logo-dot">.</span></a>
         <nav class="nav">
             <a href="/" class="nav-link">Home</a>
-            <a href="/projects" class="nav-link active">Projects</a>
+            <a href="/projects" class="nav-link active" aria-current="page">Projects</a>
             <a href="/blogs" class="nav-link">Blog</a>
         </nav>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -29,16 +45,16 @@
         <p>Things I've built, contributed to, or am currently working on.</p>
     </div>
 
-    <div class="page-content">
+    <main id="main-content" class="page-content">
         <div style="text-align: center; padding: 60px 0; color: var(--text-muted);">
             <p>Projects coming soon. Stay tuned.</p>
         </div>
-    </div>
+    </main>
 
     <footer class="site-footer">
         <p>Deployed on K8s via ArgoCD</p>
     </footer>
 
-    <script src="/script.js"></script>
+    <script src="/script.js" defer></script>
 </body>
 </html>
