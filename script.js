@@ -183,10 +183,23 @@ function updateGrafanaTheme() {
 
 /* Homepage hero scroll handoff */
 (function () {
+    var header = document.querySelector('.home-page .site-header');
     var hero = document.querySelector('.hero-profile');
     var main = document.getElementById('main-content');
     var arrow = document.querySelector('.hero-scroll');
     if (!hero || !main) return;
+
+    function updateHeaderState() {
+        if (!header) return;
+        if (window.scrollY > 16) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    updateHeaderState();
+    window.addEventListener('scroll', updateHeaderState, { passive: true });
 
     function goToMain() {
         main.scrollIntoView({ behavior: 'smooth', block: 'start' });
