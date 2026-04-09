@@ -5,7 +5,7 @@ RUN rm /etc/nginx/conf.d/default.conf \
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY index.html projects.html blogs.html style.css script.js build-info.json ivan-pfp.jpg favicon.svg /usr/share/nginx/html/
+COPY index.html projects.html blogs.html style.css script.js build-info.json robots.txt sitemap.xml ivan-pfp.jpg favicon.svg cncf-blog.png /usr/share/nginx/html/
 COPY icons/ /usr/share/nginx/html/icons/
 
 RUN chown -R nginx:nginx /usr/share/nginx/html \

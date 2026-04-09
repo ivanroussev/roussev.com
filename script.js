@@ -14,7 +14,7 @@ function toggleTheme() {
 
 function updateGrafanaTheme() {
     var theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-    var iframes = document.querySelectorAll('.grafana-uptime iframe');
+    var iframes = document.querySelectorAll('.grafana-uptime iframe, .grafana-gauge iframe, .ssl-embed iframe');
     for (var i = 0; i < iframes.length; i++) {
         var src = iframes[i].src;
         iframes[i].src = src.replace(/theme=(dark|light)/, 'theme=' + theme);
@@ -27,72 +27,12 @@ function updateGrafanaTheme() {
         document.documentElement.setAttribute('data-theme', 'light');
         updateGrafanaTheme();
     }
+    requestAnimationFrame(function () {
+        document.documentElement.classList.add('theme-ready');
+    });
 })();
 
-/* GitHub contribution graph (simulated) */
-(function () {
-    var graph = document.getElementById('github-graph');
-    if (!graph) return;
-    for (var w = 0; w < 20; w++) {
-        var col = document.createElement('div');
-        col.style.display = 'flex';
-        col.style.flexDirection = 'column';
-        col.style.gap = '2px';
-        for (var d = 0; d < 7; d++) {
-            var cell = document.createElement('div');
-            cell.className = 'gh-cell';
-            var r = Math.random();
-            var level = 0;
-            if (r > 0.55) level = 1;
-            if (r > 0.72) level = 2;
-            if (r > 0.85) level = 3;
-            if (r > 0.93) level = 4;
-            cell.setAttribute('data-level', level);
-            col.appendChild(cell);
-        }
-        graph.appendChild(col);
-    }
-})();
 
-/* Live healthcheck tiles */
-(function () {
-    var grid = document.getElementById('healthcheck-grid');
-    if (!grid) return;
-    var services = [
-        { name: 'roussev.com', url: 'https://roussev.com' },
-        { name: 'grafana', url: 'https://grafana.roussev.com' },
-        { name: 'argocd', url: 'https://argo.roussev.com' },
-        { name: 'docmost', url: 'https://docs.roussev.com' },
-        { name: 'harbor', url: 'https://harbor.roussev.com' }
-    ];
-    var tiles = {};
-    function createTile(svc, index) {
-        var tile = document.createElement('div');
-        tile.className = 'hc-tile';
-        tile.style.animationDelay = (index * 150) + 'ms';
-        var domain = svc.url.replace('https://', '');
-        var nameHtml;
-        if (domain === 'roussev.com') {
-            nameHtml = 'roussev<span class="hc-domain">.com</span>';
-        } else {
-            var sub = domain.replace('.roussev.com', '');
-            nameHtml = sub + '<span class="hc-domain">.roussev.com</span>';
-        }
-        tile.innerHTML = '<span class="hc-dot pending"></span><span class="hc-name">' + nameHtml + '</span><span class="hc-ms">—</span><span class="hc-badge">checking</span>';
-        return tile;
-    }
-    function checkService(svc, index) {
-        if (!tiles[svc.name]) { tiles[svc.name] = createTile(svc, index); grid.appendChild(tiles[svc.name]); }
-        var tile = tiles[svc.name], dot = tile.querySelector('.hc-dot'), ms = tile.querySelector('.hc-ms'), badge = tile.querySelector('.hc-badge');
-        dot.className = 'hc-dot pending'; badge.className = 'hc-badge'; badge.textContent = '...';
-        var start = performance.now();
-        fetch(svc.url, { mode: 'no-cors', cache: 'no-store' })
-            .then(function () { var d = Math.round(performance.now() - start); dot.className = 'hc-dot up'; ms.textContent = d + 'ms'; badge.className = 'hc-badge up'; badge.textContent = 'UP'; })
-            .catch(function () { dot.className = 'hc-dot down'; ms.textContent = '—'; badge.className = 'hc-badge down'; badge.textContent = 'DOWN'; });
-    }
-    services.forEach(function (svc, i) { setTimeout(function () { checkService(svc, i); }, i * 300); });
-    setInterval(function () { services.forEach(function (svc, i) { setTimeout(function () { checkService(svc, i); }, i * 200); }); }, 5000);
-})();
 
 /* Release showcase */
 (function () {

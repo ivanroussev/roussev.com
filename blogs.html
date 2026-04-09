@@ -22,6 +22,15 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+        (function () {
+            try {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
@@ -47,19 +56,20 @@
 
     <main id="main-content" class="page-content">
         <!-- Add new posts at the top -->
-        <!--
         <div class="blog-entry">
-            <h3><a href="#">Post Title</a></h3>
-            <p class="blog-date">March 3, 2026</p>
-            <p>A brief summary or excerpt of the blog post.</p>
-            <div class="project-tags">
-                <span class="tag">DevOps</span>
-            </div>
-        </div>
-        -->
-
-        <div style="text-align: center; padding: 60px 0; color: var(--text-muted);">
-            <p>First posts coming soon. Stay tuned.</p>
+            <a href="https://www.cncf.io/blog/2026/04/02/gitops-policy-as-code-securing-kubernetes-with-argo-cd-and-kyverno/" target="_blank" rel="noopener" class="blog-entry-link">
+                <img src="/cncf-blog.png" alt="GitOps policy-as-code: Securing Kubernetes with Argo CD and Kyverno" class="blog-entry-img" loading="lazy" width="1800" height="945">
+                <h3>GitOps Policy-as-Code: Securing Kubernetes with Argo CD and Kyverno</h3>
+                <p class="blog-date">April 2, 2026 · cncf.io</p>
+                <p>A hands-on guide to deploying Kyverno alongside Argo CD, enforcing baseline Pod Security Standards, and writing custom policies — all managed through GitOps.</p>
+                <div class="project-tags">
+                    <span class="tag">Kubernetes</span>
+                    <span class="tag">GitOps</span>
+                    <span class="tag">Kyverno</span>
+                    <span class="tag">ArgoCD</span>
+                    <span class="tag">Security</span>
+                </div>
+            </a>
         </div>
     </main>
 
