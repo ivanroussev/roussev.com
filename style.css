@@ -541,21 +541,6 @@ button:focus-visible,
     border: none;
     display: block;
 }
-.uptime-kuma-embed {
-    flex: 5;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    background: #181b1f;
-    min-height: 180px;
-    margin-top: 6px;
-}
-[data-theme="light"] .uptime-kuma-embed { background: #f4f5f5; }
-.uptime-kuma-embed iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-}
 
 
 /* === INFRA DIAGRAM === */
