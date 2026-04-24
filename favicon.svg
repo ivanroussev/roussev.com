@@ -1,11 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
-  <rect width="100" height="100" fill="#0f172a"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
   <text x="50%" y="55%" 
-        font-family="monospace" 
-        font-size="50" 
+        font-family="system-ui, -apple-system, sans-serif" 
+        font-size="52" 
+        font-weight="700" 
         fill="white" 
         text-anchor="middle" 
-        dominant-baseline="middle">
-    IR
-  </text>
+        dominant-baseline="middle"
+        letter-spacing="-1">ir<tspan fill="#3b82f6">.</tspan></text>
 </svg>
