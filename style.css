@@ -603,13 +603,13 @@ button:focus-visible,
     .tile-release { grid-column: 1 / 3; grid-row: auto; }
     .tile-experience { grid-column: 1 / 3; grid-row: auto; }
     .tile-blog { grid-column: 1; grid-row: auto; }
-    .tile-certs { grid-column: 2; grid-row: auto; }
-    .section-divider { grid-column: 1 / 3; }
-    .tile-status { grid-column: 1 / 3; grid-row: auto; }
-    .tile-specs { grid-column: 1 / 3; grid-row: auto; }
-    .tile-routes { grid-column: 1 / 3; grid-row: auto; }
-    .tile-education { grid-column: 1 / 3; grid-row: auto; }
-    .tile-stack { grid-column: 1 / 3; grid-row: auto; }
+    .tile-certs { grid-column: 2; grid-row: auto; order: 10; }
+    .section-divider { grid-column: 1 / 3; order: 50; }
+    .tile-status { grid-column: 1 / 3; grid-row: auto; order: 51; }
+    .tile-specs { grid-column: 1 / 3; grid-row: auto; order: 52; }
+    .tile-routes { grid-column: 1 / 3; grid-row: auto; order: 53; }
+    .tile-education { grid-column: 1 / 3; grid-row: auto; order: 54; }
+    .tile-stack { grid-column: 1 / 3; grid-row: auto; order: 55; }
 }
 @media (max-width: 600px) {
     .hero-profile {
@@ -633,6 +633,12 @@ button:focus-visible,
     .hero-scroll-text { font-size: 10px; }
     .bento-grid { grid-template-columns: 1fr; padding: 14px 12px 32px; scroll-margin-top: 64px; }
     .bento-grid .tile { grid-column: 1 !important; grid-row: auto !important; }
+    .tile-certs { order: 10; }
+    .section-divider { order: 50; }
+    .tile-status { order: 51; }
+    .tile-specs { order: 52; }
+    .tile-routes { order: 53; }
+    .tile-stack { order: 54; }
     .tile-release { order: 98; }
     .tile-contact { order: 99; }
     .site-header { padding: 16px; }
