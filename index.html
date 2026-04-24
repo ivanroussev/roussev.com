@@ -202,14 +202,65 @@
                     <iframe src="https://grafana.roussev.com/d-solo/roussev-status-page/roussev-com-status-page?orgId=1&panelId=11&theme=dark&refresh=30s" title="Memory Usage"></iframe>
                 </div>
             </div>
-            <a href="https://grafana.roussev.com/d/roussev-status-page/roussev-com-status-page" target="_blank" rel="noopener" class="tile-link">View full dashboard on Grafana →</a>
-        </section>
-
-        <section class="tile tile-ssl" aria-label="SSL & Uptime">
+            <p class="status-section-label">SSL Certificate</p>
             <div class="ssl-embed">
                 <iframe src="https://grafana.roussev.com/d-solo/ssl-cert-expiry/ssl-certificate-expiry?orgId=1&theme=dark&refresh=30s&panelId=1" title="SSL Certificate Expiry"></iframe>
             </div>
+            <a href="https://grafana.roussev.com/d/roussev-status-page/roussev-com-status-page" target="_blank" rel="noopener" class="tile-link">View full dashboard on Grafana →</a>
+        </section>
 
+        <section class="tile tile-specs" aria-label="Homelab Specs">
+            <h2>Homelab Specs</h2>
+            <span class="specs-provider">Hetzner Cloud · Single Node</span>
+            <div class="specs-grid">
+                <div class="specs-item">
+                    <span class="specs-value">8</span>
+                    <span class="specs-label">vCPU</span>
+                </div>
+                <div class="specs-item">
+                    <span class="specs-value">16 GB</span>
+                    <span class="specs-label">RAM</span>
+                </div>
+                <div class="specs-item">
+                    <span class="specs-value">160 GB</span>
+                    <span class="specs-label">Disk</span>
+                </div>
+                <div class="specs-item">
+                    <span class="specs-value">v1.34.4</span>
+                    <span class="specs-label">K8s Version</span>
+                </div>
+            </div>
+            <div class="specs-meta">
+                <span>OS: Linux</span>
+                <span>Node: iroussev</span>
+            </div>
+        </section>
+
+        <section class="tile tile-routes" aria-label="Active Routes">
+            <h2>Active Routes</h2>
+            <span class="routes-provider">Traefik Ingress</span>
+            <ul class="routes-list">
+                <li class="routes-item">
+                    <span class="routes-dot"></span>
+                    <a href="https://roussev.com" target="_blank" rel="noopener">roussev.com</a>
+                </li>
+                <li class="routes-item">
+                    <span class="routes-dot"></span>
+                    <a href="https://grafana.roussev.com" target="_blank" rel="noopener">grafana.roussev.com</a>
+                </li>
+                <li class="routes-item">
+                    <span class="routes-dot"></span>
+                    <a href="https://status.roussev.com" target="_blank" rel="noopener">status.roussev.com</a>
+                </li>
+                <li class="routes-item">
+                    <span class="routes-dot"></span>
+                    <a href="https://argocd.roussev.com" target="_blank" rel="noopener">argocd.roussev.com</a>
+                </li>
+                <li class="routes-item">
+                    <span class="routes-dot"></span>
+                    <a href="https://cloud.roussev.com" target="_blank" rel="noopener">cloud.roussev.com</a>
+                </li>
+            </ul>
         </section>
 
         <section class="tile tile-infra" aria-label="Infrastructure">
